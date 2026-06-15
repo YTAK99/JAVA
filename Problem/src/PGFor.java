@@ -1,5 +1,3 @@
-package Problem;
-
 public class PGFor {
    public static void main(String[] args) {
        char ch = 'A';
