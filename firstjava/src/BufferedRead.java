@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////////
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
+public class BufferedRead {
     // 1. BufferedReader를 쓰려면 메서드 옆에 'throws IOException'을 반드시 적어야 합니다.
     public static void main(String[] args) throws IOException {
         
@@ -29,35 +29,35 @@ public class Main {
 ////////////////////////////////////////////////////////////////////////
 /// 
 /// 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+// import java.io.BufferedReader;
+// import java.io.IOException;
+// import java.io.InputStreamReader;
+// import java.util.StringTokenizer;
 
-public class BufferedRead {
-    public static void main(String[] args) throws IOException {
-        //1 . -----------------
-//        try {
-//            BufferedReader br = new BufferedReader((new InputStreamReader((System.in))));
-//            String line = br.readLine();
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
+// public class BufferedRead {
+//     public static void main(String[] args) throws IOException {
+//         //1 . -----------------
+// //        try {
+// //            BufferedReader br = new BufferedReader((new InputStreamReader((System.in))));
+// //            String line = br.readLine();
+// //        } catch (Exception e) {
+// //            System.out.println(e);
+// //        }
 
-        // 2. -------------------
-        BufferedReader br = new BufferedReader((new InputStreamReader((System.in))));
-        String line = br.readLine();
-//        System.out.println(line);
-        StringTokenizer st = new StringTokenizer(line);
-        int cnt = 0;
-        while (st.hasMoreTokens()) {
-            String num = st.nextToken();
-//            System.out.println(num);
-            int n = Integer.parseInt(num);
-            if (n % 2 == 0) {
-                cnt++;
-            }
-        }
-        System.out.printf("입력받은 짝수는 %d개입니다.", cnt);
-    }
-}
+//         // 2. -------------------
+//         BufferedReader br = new BufferedReader((new InputStreamReader((System.in))));
+//         String line = br.readLine();
+// //        System.out.println(line);
+//         StringTokenizer st = new StringTokenizer(line);
+//         int cnt = 0;
+//         while (st.hasMoreTokens()) {
+//             String num = st.nextToken();
+// //            System.out.println(num);
+//             int n = Integer.parseInt(num);
+//             if (n % 2 == 0) {
+//                 cnt++;
+//             }
+//         }
+//         System.out.printf("입력받은 짝수는 %d개입니다.", cnt);
+//     }
+// }

@@ -13,6 +13,8 @@ public class CommonlyUsed {
 System.out.print("그냥 출력");
 System.out.println("출력 후 줄바꿈");
 System.out.printf("형식 문자열에 맞추어 뒤의 값을 출력");   // %d, %f, %c, %s
+// .1f하면 둘째자리에서 반올림
+// %출력은 %%로
 
 -------------------------------------------------------------------------------
 
@@ -22,20 +24,36 @@ double height = 175.5;  // 실수
 char grade = 'A';   // 문자
 String name = "홍길동";     // 문자열
 
+// int → Integer
+// double → Double
+// char → Character
+// boolean → Boolean
+
 -------------------------------------------------------------------------------
 
 // #입력(여러 개 작성하면 그만큼 입력받음)
 import java.util.Scanner;
-
 Scanner sc = new Scanner(System.in);
+
 int n = sc.nextInt();   // 정수 입력
-sc.nextLine();     // 버퍼에 남아있는 엔터를 청소
+
+double d = sc.nextDouble();     // 실수 입력
 
 String name = sc.next();    // 문자열 입력
-sc.nextLine();     // 버퍼에 남아있는 엔터를 청소
+
+sc.nextLine();     // 버퍼에 남아있는 엔터를 청소. (nextLine 쓰기 전에만.)
+                   // nextInt()는 엔터는 안 가져가기 때문에 남아있어서 빈 문자열을 넣음.
 
 String str = sc.nextLine();     // 한 줄 전체 입력
-sc.nextLine();     // 버퍼에 남아있는 엔터를 청소
+
+sc.close();     // Resource Leak 예방차원에서 입력 다 끝나고 닫아주는 것이 좋다.
+
+
+// try 괄호 안에 선언하면, 블록이 끝날 때 자동으로 sc가 닫힌다.
+try (Scanner sc = new Scanner(System.in)) {
+    // ... 코드 실행
+} // <-- 여기서 sc가 자동으로 close() 됨
+
 
 -------------------------------------------------------------------------------
 
@@ -65,6 +83,9 @@ switch(n){
         System.out.println("기타");
 }
 
+
+int result = condition ? 1 : 0;     // condition이 true면 1, false면 0을 반환
+
 -------------------------------------------------------------------------------
 
 // #반복문 (1~10 출력)
@@ -80,7 +101,7 @@ while(i<=10){
 }
 
 for(int n : arr){       // 향상된 for문
-    System.out.println(n);
+    System.out.println(n);  // 여기서 n은 인덱스가 아닌 실제값.
 }
 
 -------------------------------------------------------------------------------
@@ -94,21 +115,71 @@ arr[0] = 10;    // 값 저장
 
 System.out.println(arr[0]);     // 출력
 
-for(int i=0;i<5;i++){       // 5번 입력받기
-    arr[i] = sc.nextInt();
+int[] arr = new int[5];
+for(int i=0;i<5;i++) {
+    arr[i] = sc.nextInt();      // 5번 입력받기
 }
 
-for(int i=0;i<5;i++){       // 5개 전체 출력
-    System.out.println(arr[i]);
+int[] arr = new int[5];
+for(int i=0;i<5;i++) {
+    System.out.print(arr[i] + " ");     // 5개 전체 출력
 }
 
 arr.length      // 배열 길이 반환
 
 
-import java.util.Arrays;        // 정렬
+int sum = 0;
+for(int n : arr){       // 향상된 for문으로 합계
+    sum += n;
+}
+int avg = sum / arr.length;     // 평균
 
-int[] arr = {5,2,4,1};          // 정렬
+
+int max = arr[0];       // 최댓값. (최솟값은min으로)
+for(int n : arr){
+    if(n > max){
+        max = n;
+    }
+}
+
+
+int count = 0;          // 짝수 개수 세기
+for(int n : arr){
+    if(n % 2 == 0){
+        count++;
+    }
+}
+
+
+import java.util.Arrays;
+int[] arr = {5,2,4,1};
 Arrays.sort(arr);               // 정렬
+
+-------------------------------------------------------------------------------
+
+// #ArrayList   (Integer, Double, Character, Boolean)
+import java.util.ArrayList;
+
+ArrayList<Integer> list = new ArrayList<>();
+ArrayList<String> stringlist = new ArrayList<>();
+
+list.add(값);   // 값 추가
+list.get(인덱스)    // 값 꺼내기
+list.set(인덱스, 값);   // 값 수정
+list.remove(값);    // 값 삭제
+list.size()     // 크기 반환
+
+
+for (int i = 0; i < list.size(); i++) {
+    System.out.println(list.get(i));
+}
+
+int sum = 0;
+for (int n : list) {
+    System.out.println(n);
+    sum += n;       // List합계
+}
+double avg = (double)sum / list.size();     // 평균
 
 -------------------------------------------------------------------------------
 
@@ -146,29 +217,6 @@ str.length()    // 문자열 길이 반환
 String str = "Hello Java";
 String upper = str.toUpperCase();   // 모든 영문자를 대문자로 변환
 String lower = str.toLowerCase();   // 모든 영문자를 소문자로 변환
-
--------------------------------------------------------------------------------
-
-// #ArrayList   (Integer, Double, Character, Boolean)
-import java.util.ArrayList;
-
-ArrayList<Integer> list = new ArrayList<>();
-ArrayList<String> stringlist = new ArrayList<>();
-
-list.add(값);   // 값 추가
-list.get(인덱스)    // 값 꺼내기
-list.set(인덱스, 값);   // 값 수정
-list.remove(값);    // 값 삭제
-list.size()     // 크기 반환
-
-
-for (int i = 0; i < list.size(); i++) {
-    System.out.println(list.get(i));
-}
-
-for (int n : list) {
-    System.out.println(n);
-}
 
 -------------------------------------------------------------------------------
 
@@ -237,15 +285,31 @@ Math.max(10,20);    // 최댓값
 Math.min(10,20);    // 최솟값
 Math.abs(-10);      // 절댓값
 Math.pow(2,3);      // 제곱
+Math.sqrt(25);      // 제곱근
+Math.round(3.5);    // 반올림
+Math.ceil(3.1);     // 올림
+Math.floor(3.9);    // 내림
+
+
+double num = 3.14159;
+double result = Math.ceil(num * 10) / 10.0;     // 첫째자리에서 올림
+System.out.println(result);                     // 3.2
 
 -------------------------------------------------------------------------------
 
 // #Random
 import java.util.Random;
-
 Random r = new Random();
-int num = r.nextInt(10);    // 범위 : 0~9
 
+int num = r.nextInt(b - a + 1) + a;     // 범위 : a~b
+int num = r.nextInt(10);    // 범위 : 0~9
+int num = r.nextInt(100) + 1;   // 범위 : 1~100
+int num = r.nextInt(6) + 5;     // 범위 : 5~10 (10-5+1=6)
+int lotto = r.nextInt(45) + 1;      // 범위 : 1~45
+
+0.0 <= Math.random() < 1.0
+8 <= (int)(Math.random() * 4 ) + 8 < 32
+예) 주사위 : 1 <= (int) (Math.random()*6+1) < 7
 -------------------------------------------------------------------------------
 
 // #형변환
@@ -253,7 +317,13 @@ String s = String.valueOf(100);             // 정수 → 문자열
 int n = Integer.parseInt("100");            // 문자열 → 정수
 double d = Double.parseDouble("3.14");      // 문자열 → 실수
 
+-------------------------------------------------------------------------------
 
+// 기타
+int intValue = 100;
+double doubleValue = 3.14;
+double result = doubleValue * intValue;
+long roundedResult = Math.round(result);    // 반올림
 
 
 
