@@ -56,6 +56,17 @@ try (Scanner sc = new Scanner(System.in)) {
     // ... 코드 실행
 } // <-- 여기서 sc가 자동으로 close() 됨
 
+
+// StringTokenizer 사용법
+// 1. 한 줄을 통째로 읽어옴
+String line = sc.nextLine(); 
+// 2. 읽어온 줄을 공백 단위로 분리해주는 토크나이저 생성
+StringTokenizer st = new StringTokenizer(line, " ");
+// 3. 차례대로 꺼내서 사용하기
+String gender = st.nextToken();                 // 첫 번째 덩어리 ("여")
+int age = Integer.parseInt(st.nextToken());  // 두 번째 덩어리 ("25") -> 정수 변환
+System.out.printf("%s %d\n", gender, age);
+
 -------------------------------------------------------------------------------
 
 // #조건문
@@ -86,6 +97,9 @@ switch(n){
 
 
 int result = condition ? 1 : 0;     // condition이 true면 1, false면 0을 반환
+
+// 문자열을 비교할때는 반드시 .equals() 사용
+if (gender.equals("F"))
 
 -------------------------------------------------------------------------------
 
