@@ -13,7 +13,7 @@ public class Main {
 System.out.print("그냥 출력");
 System.out.println("출력 후 줄바꿈");
 System.out.printf("형식 문자열에 맞추어 뒤의 값을 출력");   // %d, %f, %c, %s
-// .1f하면 둘째자리에서 반올림
+// %.1f하면 둘째자리에서 반올림
 // %출력은 %%로
 
 -------------------------------------------------------------------------------
@@ -67,6 +67,12 @@ String gender = st.nextToken();                 // 첫 번째 덩어리 ("여")
 int age = Integer.parseInt(st.nextToken());  // 두 번째 덩어리 ("25") -> 정수 변환
 System.out.printf("%s %d\n", gender, age);
 
+
+char[] arr = new char[10];                  //문자 입력
+for (int i = 0; i < arr.length; i++) {
+    arr[i] = sc.next().charAt(0);
+}
+
 -------------------------------------------------------------------------------
 
 // #조건문
@@ -85,14 +91,14 @@ int n = 2;
 switch(n){
     case 1:
         System.out.println("하나");
-        break;
+        break;  // switch 문 탈출 (없으면 아래가 다 실행됨)
 
     case 2:
         System.out.println("둘");
-        break;
+        break;  // switch 문 탈출
 
     default:
-        System.out.println("기타");
+        System.out.println("기타");     // 1,2가 아닌 그 외의 숫자일때 실행
 }
 
 
@@ -101,11 +107,21 @@ int result = condition ? 1 : 0;     // condition이 true면 1, false면 0을 반
 // 문자열을 비교할때는 반드시 .equals() 사용
 if (gender.equals("F"))
 
+if (go.equalsIgnoreCase("Y"))   // = if (go.equals("Y") || go.equals("y"))
+
 -------------------------------------------------------------------------------
 
 // #반복문 (1~10 출력)
-for(int i=1;i<=10;i++){
+for(int i=1;i<=10;i++){         // 2증가는 i+=2
     System.out.println(i);
+}
+
+
+// 2. 외부 변수를 이용해 for문 실행
+int start = sc.nextInt();
+int end = sc.nextInt();
+for (int i = start; i <= end; i++) {
+    System.out.print(i + " ");
 }
 
 
@@ -115,8 +131,19 @@ while(i<=10){
     i++;
 }
 
+
 for(int n : arr){       // 향상된 for문
     System.out.println(n);  // 여기서 n은 인덱스가 아닌 실제값.
+}
+
+
+boolean run = true;     // 무한 루프 제어를 위한 변수
+while(run) {
+    int num = sc.nextInt();
+    if (num == 0) {
+        run = false;    // while 문 조건을 false로 바꾸어 루프 종료
+        break;
+    }
 }
 
 -------------------------------------------------------------------------------
@@ -170,9 +197,16 @@ for(int n : arr){
 }
 
 
+for (int i = alphabet.length - 1; i >= 0; i--) {
+            System.out.print(alphabet[i] + " ");
+}       // 알파벳 배열 역순 출력
+
+
 import java.util.Arrays;
 int[] arr = {5,2,4,1};
 Arrays.sort(arr);               // 정렬
+Arrays.toString(arr);           // 배열을 [ ]로 감싸고 ,로 구분된 문자열로 바꿔줌
+Arrays.stream(arr).forEach(n -> System.out.print(n + ""));  // 공백으로 구분
 
 -------------------------------------------------------------------------------
 
@@ -199,6 +233,16 @@ for (int n : list) {
     sum += n;       // List합계
 }
 double avg = (double)sum / list.size();     // 평균
+
+
+Integer[] arr = {1, 2, 3, 4, 5};
+Collections.reverse(Arrays.asList(arr));        // 배열을 리스트로 변환 후 뒤집기
+System.out.println(Arrays.toString(arr));
+
+
+Integer[] arr = {3, 1, 5, 2, 4};
+Arrays.sort(arr, Collections.reverseOrder());     // 내림차순 정렬
+System.out.println(Arrays.toString(arr));
 
 -------------------------------------------------------------------------------
 
