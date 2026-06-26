@@ -309,19 +309,40 @@ s.age = 20;
 
 System.out.println(s.name);     // 출력
 
+
+Student[] st = new Student[3];      // 배열과 같이 사용
+for(int i=0;i<3;i++){
+    st[i] = new Student();
+}
+
+st[0].name = "김철수";
+st[0].kor = 90;
+
+st[1].name = "이영희";
+st[1].kor = 100;
+
+System.out.println(st[1].name);
+
 -------------------------------------------------------------------------------
 
 // # 생성자 (객체 만들 때 초기화)
-class Student{
+class Human{
     String name;
     int age;
 
-    Student(String name,int age){
+    // 생성자
+    Human(String name, int age){
         this.name = name;
         this.age = age;
     }
 }
-Student s = new Student("홍길동",20);      // 사용
+String name = sc.next();
+int age = sc.nextInt();
+Human h = new Human(name, age);      // 사용방법1
+
+Human h2 = new Human(sc.next(), sc.nextInt());      // 사용방법2
+
+System.out.println(h.name + ", " + h2.age);
 
 -------------------------------------------------------------------------------
 
