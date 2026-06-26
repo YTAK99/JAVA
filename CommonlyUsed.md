@@ -344,6 +344,48 @@ Human h2 = new Human(sc.next(), sc.nextInt());      // 사용방법2
 
 System.out.println(h.name + ", " + h2.age);
 
+
+
+// 3명의 이름과 나이를 입력 받아 출력하기
+import java.util.*;
+
+class Human {
+    String name;
+    int age;
+
+    Human(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        Human[] h = new Human[3];
+
+        // 입력
+        for (int i = 0; i < h.length; i++) {
+            System.out.print("이름 : ");
+            String name = sc.next();
+
+            System.out.print("나이 : ");
+            int age = sc.nextInt();
+
+            h[i] = new Human(name, age);
+        }
+
+        System.out.println();
+
+        // 출력
+        for (Human person : h) {
+            System.out.printf("%s %d세%n", person.name, person.age);
+        }
+    }
+}
+
 -------------------------------------------------------------------------------
 
 // #static (객체 없이 사용)
@@ -360,6 +402,18 @@ try{
 }
 catch(Exception e){
     System.out.println("에러 발생");
+}
+catch(ArrayIndexOutOfBoundsException e) {
+    System.out.println("배열 오류");        // 여러 catch로, 예외마다 다르게 처리 가능
+}
+finally {
+    System.out.println("에러가 나든 안나든 무조건 실행");
+}
+
+
+// throw -> 직접 예외 발생
+if(age < 0){
+    throw new IllegalArgumentException("나이는 음수일 수 없습니다.");
 }
 
 -------------------------------------------------------------------------------
