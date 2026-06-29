@@ -435,6 +435,31 @@ System.out.println(result);                     // 3.2
 
 -------------------------------------------------------------------------------
 
+// private & public
+public class Car {
+    // 1. private : 외부에서 "직접" 건드리면 사고 나는 위험한 영역 (숨김)
+    private int speed = 0; // 외부에서 절대 직접 못 만짐! (private)
+    private int fuel = 100;
+
+    // 2. public : 외부 사람이 안전하게 누를 수 있는 "보여지는 버튼" (공개)
+    // 속도를 높이고 싶으면 반드시 이 안전한 public 메서드를 거쳐야 함!
+    public void 가속페달밟기() {
+        if (fuel <= 0) {
+            System.out.println("기름이 없어서 달릴 수 없습니다.");
+            return;
+        }
+        this.speed += 10; // 내부에서 안전하게 private 변수를 조절
+        this.fuel -= 1;
+        System.out.println("현재 속도: " + this.speed);
+    }
+}
+
+Car myCar = new Car();
+myCar.speed = -500;       // ❌ 에러 발생! (private이라 컴파일러가 소리 지르며 막음)
+myCar.가속페달밟기();     // ⭕ 정상 작동! (public이라 누구나 합법적으로 누를 수 있음)
+
+-------------------------------------------------------------------------------
+
 // #Random
 import java.util.Random;
 Random r = new Random();
