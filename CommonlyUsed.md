@@ -1,6 +1,8 @@
 ```Java
 
 // #프로그램 기본 구조
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         
@@ -208,6 +210,16 @@ Arrays.sort(arr);               // 정렬
 Arrays.toString(arr);           // 배열을 [ ]로 감싸고 ,로 구분된 문자열로 바꿔줌
 Arrays.stream(arr).forEach(n -> System.out.print(n + ""));  // 공백으로 구분
 
+
+Integer[] arr = {1, 2, 3, 4, 5};
+Collections.reverse(Arrays.asList(arr));        // 배열을 리스트로 변환 후 뒤집기
+System.out.println(Arrays.toString(arr));
+
+
+Integer[] arr = {3, 1, 5, 2, 4};
+Arrays.sort(arr, Collections.reverseOrder());     // 내림차순 정렬
+System.out.println(Arrays.toString(arr));
+
 -------------------------------------------------------------------------------
 
 // #ArrayList   (Integer, Double, Character, Boolean)
@@ -235,14 +247,20 @@ for (int n : list) {
 double avg = (double)sum / list.size();     // 평균
 
 
-Integer[] arr = {1, 2, 3, 4, 5};
-Collections.reverse(Arrays.asList(arr));        // 배열을 리스트로 변환 후 뒤집기
-System.out.println(Arrays.toString(arr));
+Collections.sort(list);   // ArrayList를 오름차순 정렬
+Collections.sort(list, Collections.reverseOrder());  // ArrayList를 내림차순 정렬
 
 
-Integer[] arr = {3, 1, 5, 2, 4};
-Arrays.sort(arr, Collections.reverseOrder());     // 내림차순 정렬
-System.out.println(Arrays.toString(arr));
+// ... 리스트에 값을 막 담았다고 가정 ...
+ArrayList<Integer> list = new ArrayList<>();
+list.add(5);
+list.add(10);
+
+// [공식] ArrayList를 일반 int[] 배열로 옮겨 담기
+int[] answer = new int[list.size()]; // 1. 리스트 크기만큼의 일반 배열을 만든다.
+for (int i = 0; i < list.size(); i++) {
+    answer[i] = list.get(i);        // 2. 반복문으로 리스트에서 get해와서 배열에 넣는다.
+}
 
 -------------------------------------------------------------------------------
 
@@ -322,6 +340,28 @@ st[1].name = "이영희";
 st[1].kor = 100;
 
 System.out.println(st[1].name);
+
+
+public class Main { // 1. 바깥 클래스
+    
+    static class Solution { // 2. 안쪽 클래스 (static을 붙여야 함!)
+        public int solution(int n) {
+            return n;
+        }
+        public static int solution2(int n) {
+            return n;
+        }
+    }
+
+    public static void main(String[] args) {
+        // static이 붙어있어야 바깥의 Main을 new로 만들지 않고 바로 Solution을 생성할 수 있음!
+        Solution sol = new Solution();       // static 없으면 이렇게
+        sol.solution(20);
+
+        int result = Solution.solution2(20);     // 클래스 이름에 점(.)만 찍어서 메서드를 바로 호출
+        System.out.println(result);
+    }
+}
 
 -------------------------------------------------------------------------------
 
@@ -530,5 +570,35 @@ public class Main {
         for (int i = 0; i < num; i++) {
             p[i].print();
         }
+    }
+}
+
+-------------------------------------------------------------------------------
+
+// return 테스트용
+import java.util.*;
+
+public class Test { // 파일명과 클래스명이 같아야 하므로 연습용 클래스 이름(Test 등)으로 지정
+    // 1. 확인하고 싶은 솔루션 클래스
+    static class Solution {
+        public int solution(int n) {
+            int answer = 0;
+            
+            // 여기에 테스트하고 싶은 코드를 작성합니다.
+            answer = n * 2; 
+            
+            return answer;
+        }
+    }
+
+    // 2. 출력을 확인하기 위한 main 메서드
+    public static void main(String[] args) {
+        Solution sol = new Solution(); // 객체 생성
+        
+        // 매개변수 n에 원하는 값(예: 5)을 넣고 결과 받아오기
+        int result = sol.solution(5); 
+        
+        // 결과 출력하여 확인
+        System.out.println("반환된 출력값: " + result);
     }
 }
