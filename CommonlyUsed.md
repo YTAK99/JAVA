@@ -315,6 +315,22 @@ int result = add(10,20);        // 사용
 
 -------------------------------------------------------------------------------
 
+// # 함수
+
+static void func() { }      // 반환값 X, 매개변수 X
+
+static void func(int a) { }     // 반환값 X, 매개변수 O
+
+static int func() {     // 반환값 O, 매개변수 X
+    return 0;
+}
+
+static double func(int a, int b, int c) {       // 반환값 O, 매개변수 O
+    return 0;
+}
+
+-------------------------------------------------------------------------------
+
 // #클래스
 class Student{      // 생성
     String name;
